@@ -2,7 +2,7 @@
 #this scripts we are assumed you have a pdgspide.jar
 #prepare three file:spid file and popopulation definiation file
 
-the examples for population definiation file:
+#the examples for population definiation file:
 """
 # spid-file generated: Fri Mar 17 16:21:56 CST 2017
 # VCF Parser questions
@@ -40,19 +40,28 @@ ARLEQUIN_WRITER_ONCATENATE_QUESTION=
 # Specify the locus/locus combination you want to write to the Arlequin file:
 ARLEQUIN_WRITER_LOCUS_COMBINATION_QUESTION=
 """
-import glob
+
 import os
-import parse
+import argparse
 
-parse=opt.argument("this is the tools vcf to arlequin")
-parse=("vcffile",-dest="inputfile",format="vcf")
+parse=argparse.ArgumentParse(description="this is the tools vcf to arlequin")
+parse.add_argument("-vcf",dest="input",help="vcf file")
+parse.add_argument("-inputformat",dest="inputformat",help="input file format,such as vcf")
+parse.add_argument("-outputformat",dest="outputformat",help="input file format,such as Arlequin")
+parse.add_argument("-output",dest="output",help="output file format,such as Arlequin")
+parse.add_argument("-spid",dest="spid",help="spid file")
+arg = parser.parse_args()
 
-for file1 in glob.glob("*_sorted.vcf"):
-	file2=file1.split('_sorted.vcf')[0]
-	format1="VCF"
-	format2="ARLEQUIN"
-	file3="vcf2alr.spid"
-	popmap=/lustre/home/xiaojianhua/data/plink_4/32_matrix_bayes/popmap.txt
-	os.system('java -Xmx1024m -Xms512m -jar /lustre/home/xiaojianhua/PGDSpider_2.0.9.0/PGDSpider2-cli.jar -inputfile  %s  -inputformat %s -outputfile %s -outformat %s -spid %s')%(file1,format1,file2,format2,file3)
+def vcf2arl(input,inputformat,output,outputformat,spid)
+	os.system('java -Xmx1024m -Xms512m -jar /lustre/home/xiaojianhua/PGDSpider_2.0.9.0/PGDSpider2-cli.jar -inputfile  %s  -inputformat %s -outputfile %s -outformat %s -spid %s'%(input,inputformat,output,outputformat,spid1,file2,format2,file3))
 
+def main():
+	input=arg.input
+	output=arg.output
+	spid=arg.spid
+	inputformat=arg.inputformat
+	outputformat=arg.outputformat
+	vcf2arl(input,inputformat,output,outputformat,spid)
 
+if __name__ == "__main__":
+	main()
