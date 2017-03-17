@@ -55,7 +55,7 @@ def parse_vcf(vcf_file):
 		if line.startswith("##"):
 			pass
 		elif line.startswith("#CHROM"):
-			taxa_list = line.strip().split()[9:]
+			taxa_list = line.strip().split('\t')[9:]
 		    	b=np.empty((1,len(taxa_list)),dtype='S8')
 			c=np.empty((1,len(taxa_list)),dtype='S8')
 			for i in xrange(0,len(taxa_list)):
