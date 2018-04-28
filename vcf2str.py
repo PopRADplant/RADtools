@@ -1,4 +1,8 @@
 
+
+'''
+missing data is 0 not -9
+'''
 import vcf
 from collections import defaultdict
 import  numpy  as  np
